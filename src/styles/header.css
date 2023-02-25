@@ -1,0 +1,10 @@
+nav {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.linkHeader {
+    text-decoration: none;
+    color: rgb(3, 38, 136);
+}
