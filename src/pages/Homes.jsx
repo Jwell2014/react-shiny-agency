@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import colors from '../utils/styles/colors'
-import StyledLink from '../utils/styles/atoms'
+import {StyledLink} from '../utils/styles/atoms'
 import HomeIllustration from '../images/home-illustration.svg'
 
 const HomeWrapper = styled.div`

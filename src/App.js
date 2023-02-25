@@ -7,6 +7,7 @@ import PageNotFound from "./pages/PageNotFound";
 import Result from "./pages/Result";
 import Freelance from "./pages/Freelance";
 import { createGlobalStyle } from "styled-components";
+import Footer from "./components/Footer";
 
 const GlobalStyle = createGlobalStyle`
     div {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/survey/:questionId" element={<Survey />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
