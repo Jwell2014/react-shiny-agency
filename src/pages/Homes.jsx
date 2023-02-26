@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import colors from '../utils/styles/colors'
 import {StyledLink} from '../utils/styles/atoms'
 import HomeIllustration from '../images/home-illustration.svg'
-import { useTheme } from '../utils/hooks/callapi'
+import { useTheme } from '../utils/hooks/callAPI'
 
 const HomeWrapper = styled.div`
   display: flex;
@@ -17,6 +17,7 @@ padding: 60px 90px;
 display: flex;
 flex-direction: row;
 max-width: 1200px;
+border-radius: 10px;
 `
 
 const LeftCol = styled.div`

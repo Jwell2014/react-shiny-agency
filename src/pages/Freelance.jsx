@@ -2,7 +2,7 @@ import Card from '../components/Card';
 import styled from 'styled-components';
 import colors from '../utils/styles/colors';
 import { Loader } from '../utils/styles/atoms';
-import {useFetch, useTheme} from '../utils/hooks/callapi';
+import {useFetch, useTheme} from '../utils/hooks/callAPI';
 
 
 const CardsContainer = styled.div`

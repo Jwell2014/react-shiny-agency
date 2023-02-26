@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { SurveyContext } from '../utils/styles/context';
 import styled from 'styled-components'
 import colors from '../utils/styles/colors';
-import {useFetch, useTheme} from '../utils/hooks/callapi';
+import {useFetch, useTheme} from '../utils/hooks/callAPI';
 import { StyledLink, Loader } from '../utils/styles/atoms'
 
 const ResultsContainer = styled.div`

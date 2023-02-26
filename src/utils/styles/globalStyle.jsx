@@ -1,6 +1,6 @@
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
-import { useTheme } from '../hooks/callapi';
+import { useTheme } from '../hooks/callAPI';
 
 const StyledGlobalStyle = createGlobalStyle`
     * {

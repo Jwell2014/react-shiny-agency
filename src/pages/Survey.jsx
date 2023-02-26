@@ -4,7 +4,7 @@ import colors from "../utils/styles/colors";
 import { Loader } from "../utils/styles/atoms";
 import { useContext } from "react";
 import { SurveyContext } from "../utils/styles/context";
-import {useFetch, useTheme} from '../utils/hooks/callapi';
+import {useFetch, useTheme} from '../utils/hooks/callAPI';
 
 const SurveyContainer = styled.div`
   display: flex;
@@ -25,6 +25,7 @@ color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
 
 const LinkWrapper = styled.div`
   padding-top: 30px;
+  text-align: center;
   & a {
     color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
   }
@@ -32,6 +33,11 @@ const LinkWrapper = styled.div`
     margin-right: 20px;
 }
 `
+const LinkValidate = styled(Link)`
+  text-decoration: none;
+  color:${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
+`
+
 const ReplyBox = styled.button`
   border: none;
   height: 100px;
@@ -52,6 +58,11 @@ const ReplyBox = styled.button`
   }
   &:hover{
     background-color: #8186a0;
+    color: white;
+  }
+  & a {
+    text-decoration: none;
+    color: black;
   }
 `
 
@@ -82,7 +93,7 @@ const Survey = () => {
     const { questionId } = useParams();   
     const questionIdInt = parseInt(questionId);
     const prevQuestionId = questionIdInt === 1 ? 1 : questionIdInt - 1;
-    const nextQuestionId = questionIdInt + 1;
+    const nextQuestionId = questionIdInt === 7 ? 7 : questionIdInt + 1;
     const { theme } = useTheme()
     const {answers, saveAnswers} = useContext(SurveyContext);
      // Permet de sauvegarder la reponse en fonction de la question
@@ -97,7 +108,7 @@ const Survey = () => {
     // Permet de faire l'appel a l'API pour recuperer les données,
   //On l'affiche uniquement à la première initialisation de notre composant,
   //et on précise un tableau de dépendances vide dans notre fichier
-  // useEffect(() => {
+  // seEffect(() => {
   //   async function fetchSurvey() {
   //       setDataLoading(true)
   //       try {
@@ -107,7 +118,7 @@ const Survey = () => {
   //       } catch (err) {
   //         console.log(err)
   //         setError(true)
-  //       } finally {
+  //       } finally u{
   //         setDataLoading(false)
   //       }
   //     }
@@ -123,7 +134,7 @@ const Survey = () => {
         <SurveyContainer>
             
             {/* Affichage de la question recuperer sur API */}
-            <QuestionTitle theme={theme}>Question {questionId}</QuestionTitle>
+            <QuestionTitle theme={theme}>{surveyData && surveyData[questionId] ? ('Question' + ' ' + `${questionId}`):('Résultat')}</QuestionTitle>
             {isLoading ? (
                 <Loader/>
             ):
@@ -131,31 +142,45 @@ const Survey = () => {
             <QuestionContent theme={theme}> {surveyData[questionId]}</QuestionContent>
             }
             {/* Bouton pour permettre une reponse a la question */}
-            <ReplyWrapper>
-              <ReplyBox
-                onClick={() => saveReply(true)}
-                isSelected={answers[questionId] === true}
-              >
-                Oui
-              </ReplyBox>
-              <ReplyBox
-                onClick={() => saveReply(false)}
-                isSelected={answers[questionId] === false}
-              >
-                Non
-              </ReplyBox>
-            </ReplyWrapper>
-
-            {/* Permet de passer d'une question a une autre */}
-            <LinkWrapper theme={theme}>
-                <Link to={`/survey/${prevQuestionId}`}>Précédent</Link>
-                {/* vérifier que surveyData  est défini avant de l'utiliser dans le composant */}
-                {surveyData && surveyData[questionId] ? (
-                    <Link to={`/survey/${nextQuestionId}`}>Suivant</Link>
+            {surveyData && surveyData[questionId] ? (
+                    <div>
+                    <ReplyWrapper>
+                    <ReplyBox
+                      onClick={() => saveReply(true)}
+                      isSelected={answers[questionId] === true}
+                    >
+                          <Link to={`/survey/${nextQuestionId}`}>oui</Link>
+                    </ReplyBox>
+                    <ReplyBox
+                      onClick={() => saveReply(false)}
+                      isSelected={answers[questionId] === false}
+                    >
+                          <Link to={`/survey/${nextQuestionId}`}>non</Link>
+                    </ReplyBox>
+      
+                  </ReplyWrapper>
+                    {/* Permet de passer d'une question a une autre  */}
+                    <LinkWrapper theme={theme}>
+                    <Link to={`/survey/${prevQuestionId}`}>Précédent</Link>
+                    {/* vérifier que surveyData  est défini avant de l'utiliser dans le composant */}
+                    {surveyData && surveyData[questionId] ? (
+                        <Link to={`/survey/${nextQuestionId}`}>Suivant</Link>
+                    ) : (
+                        <Link to="/results">Résultats</Link>
+                    )}
+                   </LinkWrapper>
+                   </div>
                 ) : (
-                    <Link to="/results">Résultats</Link>
+                    <LinkValidate theme={theme} to="/results">
+                      <p>⚀⚁⚂⚃⚄⚅⚀⚁⚂⚃⚄⚅⚀⚁⚂⚃⚄⚅⚀⚁⚂⚃⚄⚅⚀⚁⚂</p>
+                      <p>CLIQUER POUR VOIR LE RESULTAT ICI</p>
+                      <p>⚀⚁⚂⚃⚄⚅⚀⚁⚂⚃⚄⚅⚀⚁⚂⚃⚄⚅⚀⚁⚂⚃⚄⚅⚀⚁⚂</p>
+                      </LinkValidate>
+                    
                 )}
-            </LinkWrapper>
+            
+
+          
         </SurveyContainer>
        
     );
