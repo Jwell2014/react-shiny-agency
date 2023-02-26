@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
 import Card from '../components/Card';
-import DefaultPicture from '../images/profile.png';
 import styled from 'styled-components';
 import colors from '../utils/styles/colors';
 import { Loader } from '../utils/styles/atoms';
+import {useFetch, useTheme} from '../utils/hooks/callapi';
+
 
 const CardsContainer = styled.div`
   display: grid;
@@ -15,18 +15,19 @@ const CardsContainer = styled.div`
 `
 
 const PageTitle = styled.h1`
-  font-size: 30px;
-  color: black;
-  text-align: center;
-  padding-bottom: 30px;
+font-size: 30px;
+text-align: center;
+padding-bottom: 30px;
+color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
 `
 
 const PageSubtitle = styled.h2`
-  font-size: 20px;
-  color: ${colors.secondary};
-  font-weight: 300;
-  text-align: center;
-  padding-bottom: 30px;
+font-size: 20px;
+color: ${colors.secondary};
+font-weight: 300;
+text-align: center;
+padding-bottom: 30px;
+color: ${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
 `
 const LoaderWrapper = styled.div`
   display: flex;
@@ -35,40 +36,50 @@ const LoaderWrapper = styled.div`
 
 const Freelance = () => {
 
-  const [freelancersList, setFreelancesList] = useState([]);
-  const [isDataloading, setDataLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const {data, isLoading, error} = useFetch(`http://localhost:8000/freelances`);
+  const {theme} = useTheme();
+  // Ici le "?" permet de s'assurer que data existe bien.
+  const freelancersList = data?.freelancersList;
 
-   // Permet de faire l'appel a l'API pour recuperer les données,
+
+
+// Permet de faire l'appel a l'API pour recuperer les données,
   //On l'affiche uniquement à la première initialisation de notre composant,
   //et on précise un tableau de dépendances vide dans notre fichier
-  useEffect(() => {
-    async function fetchFreelances() {
-      setDataLoading(true)
-      try {
-        const response = await fetch(`http://localhost:8000/freelances`)
-        const { freelancersList } = await response.json()
-        setFreelancesList(freelancersList)
-      } catch (err) {
-        console.log('===== error =====', err)
-        setError(true)
-      } finally {
-        setDataLoading(false)
-      }
-    }
-    fetchFreelances()
-  }, [])
+  // useEffect(() => {
+  //   async function fetchFreelances() {
+  //     setDataLoading(true)
+  //     try {
+  //       const response = await fetch(`http://localhost:8000/freelances`)
+  //       const { freelancersList } = await response.json()
+  //       setFreelancesList(freelancersList)
+  //     } catch (err) {
+  //       console.log('===== error =====', err)
+  //       setError(true)
+  //     } finally {
+  //       setDataLoading(false)
+  //     }
+  //   }
+  //   fetchFreelances()
+  // }, [])
+
+  if (error) {
+    return <span>Oups il y a eu un problème</span>
+  }
+
+
+   
 
 
     return (
       <div>
-      <PageTitle>Trouvez votre prestataire</PageTitle>
-      <PageSubtitle>
+       <PageTitle theme={theme}>Trouvez votre prestataire</PageTitle>
+      <PageSubtitle theme={theme}>
         Chez Shiny nous réunissons les meilleurs profils pour vous.
       </PageSubtitle>
-      {isDataloading ? (
+      {isLoading ? (
         <LoaderWrapper>
-          <Loader />
+          <Loader theme={theme} />
         </LoaderWrapper>
       ) : (
         <CardsContainer>

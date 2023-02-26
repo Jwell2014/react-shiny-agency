@@ -6,24 +6,18 @@ import Header from "./components/Header";
 import PageNotFound from "./pages/PageNotFound";
 import Result from "./pages/Result";
 import Freelance from "./pages/Freelance";
-import { createGlobalStyle } from "styled-components";
 import Footer from "./components/Footer";
-
-const GlobalStyle = createGlobalStyle`
-    div {
-        font-family: 'Trebuchet MS', Helvetica, sans-serif;
-    }
-`;
+import GlobalStyle from "./utils/styles/globalStyle";
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <GlobalStyle />
       <Header />
       <Routes>
         <Route path="/" element={<Homes />} />
-        <Route path="/result" element={<Result />} />
-        <Route path="/freelance" element={<Freelance />} />
+        <Route path="/results" element={<Result />} />
+        <Route path="/freelances" element={<Freelance />} />
         <Route path="/survey/:questionId" element={<Survey />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>

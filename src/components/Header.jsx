@@ -5,11 +5,11 @@ import colors from '../utils/styles/colors';
 import logoDark from '../images/dark-logo.png'
 
 const StyledLink = styled(Link)`
-    padding: 15px;
+    padding: 10px;
     color: #8186a0;
     text-decoration: none;
     font-size: 18px;
-    ${(props)=> props.$isFullLink && `color: white; border-radius: 30px; background-color: ${colors.primary};` }
+    ${(props)=> props.$isFullLink && `color: white; border-radius: 10px; background-color: ${colors.primary};` }
 `
 const HomeLogo = styled.img`
   height: 70px;
@@ -33,7 +33,7 @@ const Header = () => {
         </Link>
         <div>
           <StyledLink to="/">Accueil</StyledLink>
-          <StyledLink to="/freelance">Profils</StyledLink>
+          <StyledLink to="/freelances">Profils</StyledLink>
           <StyledLink to="/survey/1" $isFullLink>
             Faire le test
           </StyledLink>

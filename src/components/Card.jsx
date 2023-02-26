@@ -32,7 +32,7 @@ const Card = ({label,title,picture}) => {
     
 
     return (
-        <CardWrapper style={{ display: 'flex', flexDirection: 'column', padding: 15 }}>
+        <CardWrapper style={{ display: 'flex', flexDirection: 'column', padding: 15, }}>
             <CardLabel>{label}</CardLabel>
             <CardImage src={picture} alt="freelance" />
             <span>{title}</span>
