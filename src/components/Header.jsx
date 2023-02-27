@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import colors from '../utils/styles/colors';
 import logoDark from '../images/dark-logo.png'
+import { NavLink } from "react-router-dom";
+import '../styles/header.css';
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(NavLink)`
     padding: 10px;
-    color: #8186a0;
     text-decoration: none;
     font-size: 18px;
+  
     ${(props)=> props.$isFullLink && `color: white; border-radius: 10px; background-color: ${colors.primary};` }
 `
 const HomeLogo = styled.img`
@@ -32,8 +34,17 @@ const Header = () => {
           <HomeLogo src={logoDark} />
         </Link>
         <div>
-          <StyledLink to="/">Accueil</StyledLink>
-          <StyledLink to="/freelances">Profils</StyledLink>
+        <NavLink
+            className={({ isActive }) => (isActive ? "linkActive" : undefined)}
+            to="/"
+          >
+            Home
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? "linkActive" : undefined)}
+            to="/freelances">
+              Profils
+          </NavLink>
           <StyledLink to="/survey/1" $isFullLink>
             Faire le test
           </StyledLink>

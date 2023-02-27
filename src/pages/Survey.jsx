@@ -38,8 +38,9 @@ const LinkValidate = styled(Link)`
   color:${({ theme }) => (theme === 'light' ? '#000000' : '#ffffff')};
 `
 
-const ReplyBox = styled.button`
+const ReplyBox = styled(Link)`
   border: none;
+  text-decoration: none;
   height: 100px;
   width: 300px;
   display: flex;
@@ -51,7 +52,7 @@ const ReplyBox = styled.button`
   box-shadow: ${(props) =>
     props.isSelected ? `0px 0px 0px 2px ${colors.primary} inset` : 'none'};
   &:first-child {
-    margin-right: 15px;
+    margin-right: 10px;
   }
   &:last-of-type {
     margin-left: 15px;
@@ -148,23 +149,25 @@ const Survey = () => {
                     <ReplyBox
                       onClick={() => saveReply(true)}
                       isSelected={answers[questionId] === true}
+                      to={`/survey/${nextQuestionId}`}
                     >
-                          <Link to={`/survey/${nextQuestionId}`}>oui</Link>
+                          oui
                     </ReplyBox>
                     <ReplyBox
                       onClick={() => saveReply(false)}
                       isSelected={answers[questionId] === false}
+                      to={`/survey/${nextQuestionId}`}
                     >
-                          <Link to={`/survey/${nextQuestionId}`}>non</Link>
+                          non
                     </ReplyBox>
       
                   </ReplyWrapper>
                     {/* Permet de passer d'une question a une autre  */}
                     <LinkWrapper theme={theme}>
-                    <Link to={`/survey/${prevQuestionId}`}>Précédent</Link>
+                    <Link to={`/survey/${prevQuestionId}`}>Question Précédente</Link>
                     {/* vérifier que surveyData  est défini avant de l'utiliser dans le composant */}
                     {surveyData && surveyData[questionId] ? (
-                        <Link to={`/survey/${nextQuestionId}`}>Suivant</Link>
+                        <Link to={`/survey/${nextQuestionId}`}>Question Suivante</Link>
                     ) : (
                         <Link to="/results">Résultats</Link>
                     )}

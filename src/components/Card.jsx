@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import DefaultPicture from '../images/profile.png';
 import styled from 'styled-components';
 import colors from '../utils/styles/colors';
-import { Link } from 'react-router-dom';
 
 const CardLabel = styled.span`
     color: #5843e4;
@@ -29,15 +28,14 @@ const CardLabel = styled.span`
     }
 `
 
+
 const Card = ({label,title,picture}) => {
     
-
     return (
         <CardWrapper style={{ display: 'flex', flexDirection: 'column', padding: 15, }}>
             <CardLabel>{label}</CardLabel>
             <CardImage src={picture} alt="freelance" />
             <span>{title}</span>
-            {/* <button><Link to={"/profils/:profilId"}>la fiche</Link></button> */}
         </CardWrapper>
     );
 };

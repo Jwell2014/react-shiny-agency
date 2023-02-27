@@ -1,0 +1,12 @@
+.linkActive {
+    font-weight: bold;
+    color: rgb(5, 153, 153);
+    margin: 20px;
+}
+
+a {
+    color: rgb(166, 165, 163);
+    font-weight: bold;
+    text-decoration: none;
+    margin: 20px;
+}

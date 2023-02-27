@@ -8,6 +8,7 @@ import Result from "./pages/Result";
 import Freelance from "./pages/Freelance";
 import Footer from "./components/Footer";
 import GlobalStyle from "./utils/styles/globalStyle";
+import FreelanceDetail from "./pages/FreelanceDetail";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<Homes />} />
         <Route path="/results" element={<Result />} />
         <Route path="/freelances" element={<Freelance />} />
+        <Route path="/freelances/:id" element={<FreelanceDetail />} />
         <Route path="/survey/:questionId" element={<Survey />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>

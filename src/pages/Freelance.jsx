@@ -83,9 +83,9 @@ const Freelance = () => {
         </LoaderWrapper>
       ) : (
         <CardsContainer>
-          {freelancersList.map((profile, index) => (
+          {freelancersList.map((profile, id) => (
             <Card
-              key={`${profile.name}-${index}`}
+              key={`${profile.name}-${id}`}
               label={profile.job}
               title={profile.name}
               picture={profile.picture}
